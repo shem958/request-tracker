@@ -13,7 +13,7 @@ A premium, responsive, single-page web dashboard application built to submit, tr
 
 ## 🛠️ Technology Stack
 
-We chose a lightweight but highly capable frontend tech stack to ensure the app is fast, clean, and has zero dependency configuration issues:
+I chose a lightweight but highly capable frontend tech stack to ensure the app is fast, clean, and has zero dependency configuration issues:
 
 1. **HTML5**: Semantic and accessible markup structure.
 2. **Vanilla CSS3**: 
@@ -108,12 +108,3 @@ The project maintains a disciplined commit workflow using clean commit guideline
   - Add file attachment support (e.g. uploading screenshots/logs using Cloudflare R2).
   - Integrate a secure serverless backend (Cloudflare Pages Functions) and database (Cloudflare D1 SQL database) instead of relying solely on client-side LocalStorage.
   - Implement email alerts (using SendGrid or Resend API) to notify administrators when High-priority bugs are filed.
-
----
-
-## 👤 Candidate Details & Submission Information
-
-- **Full Name**: Shem Gikunda
-- **Email Address**: gikundashem11@gmail.com
-- **Willingness to Shift Company/Subsidiary**: Yes (Open to E-commerce Store or Web Scraping Company, no strong preference)
-- **Expected Start Date**: Monday, July 6th, 2026
