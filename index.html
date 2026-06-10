@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhotoMed Request Hub - Submit & Track Requests</title>
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles.css">
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand">
+        <div class="brand-logo">PM</div>
+        <h1 class="brand-title">PhotoMed Request Hub</h1>
+      </div>
+      <div class="header-meta">
+        <span></span> Live Tracking System
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Workspace -->
+  <main class="main-content">
+    
+    <!-- Sidebar - Submission Form -->
+    <section class="sidebar-section">
+      <div class="glass-card">
+        <h2 class="section-title"><i class="fa-solid fa-paper-plane"></i> Submit Request</h2>
+        <p class="section-subtitle">Need to report a bug, suggest a feature, or leave feedback? Let our engineering team know.</p>
+        
+        <form id="requestForm" novalidate>
+          
+          <div class="form-group">
+            <label for="userName">Full Name</label>
+            <div class="input-wrapper">
+              <input type="text" id="userName" class="form-control" placeholder="e.g. Jane Doe" required>
+              <i class="fa-solid fa-user"></i>
+            </div>
+            <div class="error-message" id="userNameError"></div>
+          </div>
+          
+          <div class="form-group">
+            <label for="userEmail">Email Address</label>
+            <div class="input-wrapper">
+              <input type="email" id="userEmail" class="form-control" placeholder="e.g. jane.doe@example.com" required>
+              <i class="fa-solid fa-envelope"></i>
+            </div>
+            <div class="error-message" id="userEmailError"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="productCompany">Product / Company Area</label>
+            <div class="input-wrapper">
+              <select id="productCompany" class="form-select" required>
+                <option value="" disabled selected>Select Product Area</option>
+                <option value="PhotoMed Portal">PhotoMed Patient Portal</option>
+                <option value="PhotoMed Patient App">PhotoMed Care App (Mobile)</option>
+                <option value="PhotoMed Lab System">PhotoMed Lab Services</option>
+                <option value="PhotoMed Diagnostics">PhotoMed Diagnostics Portal</option>
+                <option value="PhotoMed Billing & Claims">PhotoMed Billing & Claims</option>
+              </select>
+              <i class="fa-solid fa-briefcase"></i>
+            </div>
+            <div class="error-message" id="productCompanyError"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="requestType">Request Type</label>
+            <div class="input-wrapper">
+              <select id="requestType" class="form-select" required>
+                <option value="" disabled selected>Select Request Type</option>
+                <option value="Bug">Bug Report</option>
+                <option value="Feature Request">Feature Request</option>
+                <option value="General Feedback">General Feedback</option>
+                <option value="Partnership">Partnership Inquiry</option>
+                <option value="Other">Other</option>
+              </select>
+              <i class="fa-solid fa-tags"></i>
+            </div>
+            <div class="error-message" id="requestTypeError"></div>
+          </div>
+
+          <div class="form-group">
+            <label>Priority Level</label>
+            <div class="priority-selector">
+              <div class="priority-option">
+                <input type="radio" id="prioLow" name="requestPriority" value="Low" checked>
+                <label for="prioLow" class="priority-label">
+                  <i class="fa-solid fa-circle"></i> Low
+                </label>
+              </div>
+              <div class="priority-option">
+                <input type="radio" id="prioMedium" name="requestPriority" value="Medium">
+                <label for="prioMedium" class="priority-label">
+                  <i class="fa-solid fa-circle"></i> Med
+                </label>
+              </div>
+              <div class="priority-option">
+                <input type="radio" id="prioHigh" name="requestPriority" value="High">
+                <label for="prioHigh" class="priority-label">
+                  <i class="fa-solid fa-circle"></i> High
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="requestMessage">Detailed Message</label>
+            <textarea id="requestMessage" class="form-textarea" placeholder="Provide a detailed description of your request..." required></textarea>
+            <div class="error-message" id="requestMessageError"></div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="submitBtn">
+            <i class="fa-solid fa-paper-plane"></i> Send Request
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Dashboard - Requests & Stats -->
+    <section class="dashboard-panel">
+      
+      <!-- Stats Row -->
+      <div class="stats-grid">
+        <div class="stat-card stat-all">
+          <div class="stat-header">Total Requests <i class="fa-solid fa-folder-open"></i></div>
+          <div class="stat-value" id="statsTotal">0</div>
+        </div>
+        <div class="stat-new">
+          <div class="stat-card stat-new">
+            <div class="stat-header">New <i class="fa-solid fa-circle-plus"></i></div>
+            <div class="stat-value" id="statsNew">0</div>
+          </div>
+        </div>
+        <div class="stat-review">
+          <div class="stat-card stat-review">
+            <div class="stat-header">In Review <i class="fa-solid fa-spinner"></i></div>
+            <div class="stat-value" id="statsReview">0</div>
+          </div>
+        </div>
+        <div class="stat-resolved">
+          <div class="stat-card stat-resolved">
+            <div class="stat-header">Resolved <i class="fa-solid fa-circle-check"></i></div>
+            <div class="stat-value" id="statsResolved">0</div>
+          </div>
+        </div>
+        <div class="stat-rejected">
+          <div class="stat-card stat-rejected">
+            <div class="stat-header">Rejected <i class="fa-solid fa-circle-xmark"></i></div>
+            <div class="stat-value" id="statsRejected">0</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls & Filtering -->
+      <div class="glass-card control-panel">
+        
+        <!-- Search & Sort -->
+        <div class="search-row">
+          <div class="form-group" style="margin-bottom: 0;">
+            <div class="input-wrapper">
+              <input type="text" id="searchQuery" class="form-control" placeholder="Search requests by name, email, or keywords...">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+          </div>
+          <div class="form-group" style="margin-bottom: 0;">
+            <select id="sortBy" class="form-select">
+              <option value="newest">Newest First</option>
+              <option value="oldest">Oldest First</option>
+              <option value="priority-desc">Priority: High to Low</option>
+              <option value="priority-asc">Priority: Low to High</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Dropdown Filters -->
+        <div class="filters-row">
+          <div class="filter-group">
+            <label class="filter-label" for="filterProduct">Product Area</label>
+            <select id="filterProduct" class="form-select filter-select">
+              <option value="all">All Products</option>
+              <option value="PhotoMed Portal">PhotoMed Portal</option>
+              <option value="PhotoMed Patient App">PhotoMed Care App</option>
+              <option value="PhotoMed Lab System">PhotoMed Lab System</option>
+              <option value="PhotoMed Diagnostics">PhotoMed Diagnostics</option>
+              <option value="PhotoMed Billing & Claims">PhotoMed Billing & Claims</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label class="filter-label" for="filterType">Request Type</label>
+            <select id="filterType" class="form-select filter-select">
+              <option value="all">All Types</option>
+              <option value="Bug">Bug Report</option>
+              <option value="Feature Request">Feature Request</option>
+              <option value="General Feedback">General Feedback</option>
+              <option value="Partnership">Partnership</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label class="filter-label" for="filterPriority">Priority</label>
+            <select id="filterPriority" class="form-select filter-select">
+              <option value="all">All Priorities</option>
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label class="filter-label" for="filterStatus">Status</label>
+            <select id="filterStatus" class="form-select filter-select">
+              <option value="all">All Statuses</option>
+              <option value="New">New</option>
+              <option value="In Review">In Review</option>
+              <option value="Resolved">Resolved</option>
+              <option value="Rejected">Rejected</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Requests List Panel -->
+      <div class="requests-list-header">
+        <h2 class="section-title"><i class="fa-solid fa-list-check"></i> Submitted Requests</h2>
+        <div class="results-count" id="resultsCount">Showing <span>0</span> requests</div>
+      </div>
+
+      <!-- Request cards grid -->
+      <div class="requests-grid" id="requestsGrid">
+        <!-- Javascript will render cards or empty states here -->
+      </div>
+      
+    </section>
+  </main>
+
+  <!-- Details & Admin notes modal -->
+  <div class="modal-overlay" id="detailsModal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3>Request Details</h3>
+        <button class="btn-icon" id="closeModalBtn" aria-label="Close modal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      
+      <div class="modal-body" id="modalBody">
+        <!-- Rendered by JavaScript -->
+      </div>
+      
+      <div class="modal-footer">
+        <button class="btn btn-secondary btn-sm" id="modalCloseBtn">Cancel</button>
+        <button class="btn btn-primary btn-sm" id="modalSaveBtn">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <p>&copy; 2026 PhotoMed Request Hub. Prepared by Shem Gikunda for Software Engineering Attachee Assessment.</p>
+  </footer>
+
+  <!-- App Script -->
+  <script src="app.js"></script>
+</body>
+</html>
