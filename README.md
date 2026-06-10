@@ -7,7 +7,7 @@ A premium, responsive, single-page web dashboard application built to submit, tr
 ## 🚀 Live Demo & Repository Details
 
 - **GitHub Repository**: `https://github.com/shem958/request-tracker`
-- **Live Deployed App**: `[User to insert live URL after deployment]`
+- **Live Deployed App**: `https://request-track.netlify.app/`
 
 ---
 
